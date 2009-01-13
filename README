@@ -1,0 +1,63 @@
+DBIx-Class-Schema-PopulateMore
+
+This is a DBIC::Schema component and stand alone class that is an enhanced
+version of the builtin method "$schema->populate".  What it does is make it 
+easier when you are doing a first time setup and need to insert a bunch of 
+rows, like the first time you deploy a new database, or after you update it.  
+
+It's not as full featured as L<DBIx::Class::Fixtures> but is targeted more 
+directly at making it easier to just take a prewritten perl structure --or one 
+loaded from a configuration file-- and setup your database.
+
+Most of us using L<DBIx::CLass> have written a version of this at one time or
+another.  What is special to this component is the fact that unlike the normal
+populate method you can insert to multiple result_sources in one go.  While 
+doing this, we index the created rows so as to make it easy to reference them
+in relationships. I did this because I think it's very ugly to have to type in 
+all the primary keys by hand, particularly if your PK is multi column, or is
+using some lengthy format such as uuid.  Also, we can embed macro like commands
+in the row values to do inflation for us.  For example, any value starting with
+"!Index:" will substitute it's value for that of the relating fields in the 
+named row.
+
+Please see the pod for L<DBIx::Class::Schema::PopulateMore> for additional details and
+examples.  Also you can see the tests which provide a detailed example.
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+	perl Makefile.PL
+	make
+	make test
+	make install
+
+SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc DBIx::Class::Schema::PopulateMore
+
+You can also look for information at:
+
+    RT, CPAN's request tracker
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBIx-Class-Schema-PopulateMore
+
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/DBIx-Class-Schema-PopulateMore
+
+    CPAN Ratings
+        http://cpanratings.perl.org/d/DBIx-Class-Schema-PopulateMore
+
+    Search CPAN
+        http://search.cpan.org/dist/DBIx-Class-Schema-PopulateMore
+
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2008 John Napiorkowski
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
