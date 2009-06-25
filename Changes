@@ -1,6 +1,9 @@
 Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
 
-0.05 Friday, June 25, 2009
+0.06 Thursday, June 25, 2009
+    - Added SQLT to the build recommends, otherwise tests fail
+
+0.05 Thursday, June 25, 2009
     - Updated all the required versions to more recent items, since that
       is what I can test on, plus most of that older stuff has known
       compatibility issues.

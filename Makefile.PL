@@ -13,6 +13,7 @@ requires 'Module::Pluggable' => '3.9';
 requires 'Data::Visitor' => '0.25';
 
 build_requires 'DBIx::Class' => '0.08107';
+build_requires 'SQL::Translator' => '0.09004';
 build_requires 'Test::More';
 build_requires 'File::Find';
 build_requires 'YAML::Tiny';
