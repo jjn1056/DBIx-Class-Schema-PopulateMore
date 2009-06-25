@@ -11,11 +11,11 @@ DBIx::Class::Schema::PopulateMore - An enhanced populate method
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 SYNOPSIS
 
@@ -24,7 +24,7 @@ The following is example usage for this component.
 	package Myapp::Schema;
 	use base qw/DBIx::Class::Schema/;
 	
-	__PACKAGE__->load_components(qw/+DBIx::Class::Schema::PopulateMore/);
+	__PACKAGE__->load_components(qw/Schema::PopulateMore/);
 	__PACKAGE__->load_namespaces();
 	
 	## All the rest of your setup

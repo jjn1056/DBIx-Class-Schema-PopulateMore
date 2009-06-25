@@ -1,7 +1,7 @@
 package # hide from PAUSE
  DBIx::Class::Schema::PopulateMore::Test::Schema;
 
-use File::Temp qw(tempfile);
+use Path::Class;
 use base 'DBIx::Class::Schema';
 
 
@@ -25,7 +25,7 @@ Load the components
 =cut
 
 __PACKAGE__->load_components(qw/ 
-    +DBIx::Class::Schema::PopulateMore 
+    Schema::PopulateMore 
 /);
 
 
@@ -69,6 +69,9 @@ sub connect_and_setup {
         ->setup;
 }
 
+sub test_dbfile_path {
+	return Path::Class::File->new(qw/t var dbfile.sqlite/); 
+}
 
 =head2 default_dsn
 
@@ -80,7 +83,7 @@ database as a temporary file.
 sub default_dsn
 {
 	my $class = shift @_;
-	my ($fh, $filename) = tempfile(UNLINK=>1);
+	my $filename=$class->test_dbfile_path;
 	return "dbi:SQLite:${filename}";
 }
 
@@ -97,6 +100,20 @@ sub setup {
     return $self;
 }
 
+=head2 cleanup
+
+cleanup any temporary files
+
+=cut
+
+sub cleanup {
+	my $self = shift @_;
+	unlink $self->test_dbfile_path;
+}
+
+sub DESTROY {
+	(shift)->cleanup;
+}
 
 =head1 AUTHOR
 

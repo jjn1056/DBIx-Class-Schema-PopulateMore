@@ -69,7 +69,7 @@ __PACKAGE__
         },
         created => {
             data_type=>'datetime',
-            default_value=>'date("now")',
+            default_value=>\'CURRENT_TIMESTAMP',
         });
 
 
