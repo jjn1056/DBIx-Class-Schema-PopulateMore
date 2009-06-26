@@ -1,5 +1,8 @@
 Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
 
+0.09 Friday, June 26, 2009
+    - Added a Find inflator, with docs and a test case
+
 0.08 Friday, June 26, 2009
     - Fixed some documentation issues
     - fixed the copyright

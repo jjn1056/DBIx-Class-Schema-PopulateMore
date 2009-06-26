@@ -11,11 +11,11 @@ DBIx::Class::Schema::PopulateMore - An enhanced populate method
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 =head1 SYNOPSIS
 
@@ -108,6 +108,13 @@ format.  For this to work correctly, you need to use the class component
 L<DBIx::Class::InflateColumn::DateTime> and mark your column data type as 
 'datetime' or similar.
 
+=item Find
+
+Used for when you want the value of something that you expect already exists
+in the database (but for which you didn't just populatemore for, use 'Index'
+for that case.) Use cases for this include lookup style tables, like 'Status'
+or 'Gender', 'State', etc. which you may already have installed.
+
 It's trivial to write more; please feel free to post me your contributions.
 
 =back
@@ -120,7 +127,7 @@ on each data item, so this will not be as fast as using $schema->bulk_insert.
 
 This module defines the following methods.
 
-=head2 populate_more ($ArrayRef)
+=head2 populate_more ($ArrayRef||@Array)
 
 Given an arrayref formatted as in the L</SYNOPSIS> example, populate a rows in
 a database.  Confesses on errors.  

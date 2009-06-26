@@ -1,7 +1,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 31;
+use Test::More tests => 35;
 use DBIx::Class::Schema::PopulateMore::Test::Schema;
 
 ok my $schema = DBIx::Class::Schema::PopulateMore::Test::Schema->connect_and_setup
@@ -183,3 +183,24 @@ FRIENDLIST: {
 	=> 'got correct number of friends for mike';
 	
 }
+
+## Extra tests
+
+ok my $extra = [
+	{Person	=> {
+		fields => ['name', 'age', 'gender'],
+		data => {
+			joe => ['joe', 19, '!Find:Gender.[label=male]'],
+		}}},
+], 'Created extra';
+
+ok my %index2 = $schema->populate_more($extra)
+  => 'Successful populated again.';
+
+ok my $joe = $schema->resultset('Person')->search({name=>'joe'})->first,
+  => 'Got a Person';
+
+is $joe->age, 19, 'Joe is 19';
+
+
+
