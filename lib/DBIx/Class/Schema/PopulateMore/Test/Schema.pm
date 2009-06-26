@@ -70,7 +70,8 @@ sub connect_and_setup {
 }
 
 sub test_dbfile_path {
-	return Path::Class::File->new(qw/t var dbfile.sqlite/); 
+	my $path = Path::Class::File->new(qw/t var dbfile.sqlite/); 
+	return $path->absolute;
 }
 
 =head2 default_dsn
