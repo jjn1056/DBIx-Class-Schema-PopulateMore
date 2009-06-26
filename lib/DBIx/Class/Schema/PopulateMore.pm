@@ -147,7 +147,7 @@ sub populate_more {
     $self->throw_exception("Argument is required.")
 	  unless $arg;
 
-	$arg = ref $arg eq 'ARRAY' ? $arg : [$arg, @rest]
+	$arg = ref $arg eq 'ARRAY' ? $arg : [$arg, @rest];
 	
 	my $command;
 	eval {
