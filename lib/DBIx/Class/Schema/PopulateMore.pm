@@ -11,11 +11,11 @@ DBIx::Class::Schema::PopulateMore - An enhanced populate method
 
 =head1 VERSION
 
-Version 0.07
+Version 0.08
 
 =cut
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 =head1 SYNOPSIS
 
@@ -64,8 +64,8 @@ Please see the test cases for more detailed examples.
 
 =head1 DESCRIPTION
 
-This is a L<DBIx::Class::Schema> component that prodives an enhanced version
-of the builtin method DBIx::Class::Schema->populate".  What it does is make it 
+This is a L<DBIx::Class::Schema> component that provides an enhanced version
+of the builtin method L<DBIx::Class::Schema/populate>.  What it does is make it 
 easier when you are doing a first time setup and need to insert a bunch of 
 rows, like the first time you deploy a new database, or after you update it.
 
@@ -141,35 +141,31 @@ See L</SYNOPSIS> for more.
 
 =cut
 
-sub populate_more
-{
-	my $self = shift @_;
+sub populate_more {
+	my ($self, $arg, @rest) = @_;
+
+    $self->throw_exception("Argument is required.")
+	  unless $arg;
+
+	$arg = ref $arg eq 'ARRAY' ? $arg : [$arg, @rest]
 	
-	if( my $arg = shift @_)
-	{
-		if( ref $arg eq 'ARRAY')
-		{
-			DBIx::Class::Schema::PopulateMore::Command
-				->new(
-					definitions=>$arg,
-					schema=>$self )
-				->execute;			
-		}
-		else
-		{
-			$self->throw_exception("Supplied Argument is not an ArrayRef");
-		}
-	}
-	else
-	{
-		$self->throw_exception("Argument is required.");
-	}
+	my $command;
+	eval {
+		$command = DBIx::Class::Schema::PopulateMore::Command->new(
+			definitions=>$arg,
+			schema=>$self,
+		);
+	}; if ($@) {
+		$self->throw_exception("Can't create Command: $@");
+	} else {
+		$command->execute;
+	}			
 }
 
 
 =head1 ARGUMENT NOTES
 
-The perl structed used in L</populate_more> was designed to be reasonable
+The perl structure used in L</populate_more> was designed to be reasonable
 friendly to type in most of the popular configuration formats.  For example,
 the above serialized to YAML would look like:
 
@@ -203,14 +199,14 @@ the above serialized to YAML would look like:
 			- '!Index:Person.jane'
 			- '!Date: March 30, 1996'
 
-Since the argument is an arrayref, the same base result source can appear as
-many times as you like.  This could be useful when a second insert to a given
-source requires completion of other inserts.  The insert order follows the
-index of the arrayref you create.
+Since the argument is an arrayref or an array, the same base result source can 
+appear as many times as you like.  This could be useful when a second insert 
+to a given source requires completion of other inserts.  The insert order 
+follows the index of the arrayref you create.
 
 =head1 AUTHOR
 
-John Napiorkowski, C<< <jjn1056 at yahoo.com> >>
+John Napiorkowski, C<< <jjnapiork@cpan.org> >>
 
 =head1 BUGS
 
@@ -259,7 +255,9 @@ Thanks to the entire L<DBIx::Class> team for providing such a useful and
 extensible ORM.  Also thanks to the L<Moose> developers for making it fun and
 easy to write beautiful Perl.
 
-=head1 LICENSE
+=head1 LICENSE & COPYRIGHT
+
+Copyright 2008-2009, John Napiorkowski <jjnapiork@cpan.org>
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
