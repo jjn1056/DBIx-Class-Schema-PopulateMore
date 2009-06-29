@@ -38,9 +38,11 @@ sub inflate
 
 	if(my $resultset = $command->schema->resultset($source)) {
 		if($id =~m/^\[.+\]$/) {
-			my ($key, $value) = ($id =~m/^\[\s*(\w+?)=(\w+?)\s*\]$/);
-			$id = {$key, $value};
-		} else { warn '.........\n\n'; }
+			my ($pairs) = ($id=~m/^\[(.+)\]$/);
+			my @pairs = split(',', $pairs);
+			my %keys = map {split('=', $_) } @pairs;
+			$id = \%keys;
+		}
 		if(my $result = $resultset->find($id)) {
 			return $result;
 		} else {
