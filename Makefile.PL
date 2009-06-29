@@ -13,6 +13,7 @@ requires 'Module::Pluggable' => '3.9';
 requires 'Data::Visitor' => '0.25';
 
 build_requires 'DBIx::Class' => '0.08107';
+build_requires 'DateTime::Format::SQLite' => '0.10'; ## needed by DBIC for datetime in/deflators
 build_requires 'SQL::Translator' => '0.09007';
 build_requires 'Test::More' => '0.88';
 build_requires 'File::Find';
