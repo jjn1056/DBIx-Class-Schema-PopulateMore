@@ -1,8 +1,11 @@
 Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
 
+0.11 Monday, June 28, 2009
+    - Minor doc changes and dependency tweaks to fix more cpan fails
+
 0.10 Sunday, June 27,  2009
     - changed the find inflator to allow multikey finds
-		- more Makefile.PL tweaks to solve some cpan reported errors
+    - more Makefile.PL tweaks to solve some cpan reported errors
 
 0.09 Friday, June 26, 2009
     - Added a Find inflator, with docs and a test case

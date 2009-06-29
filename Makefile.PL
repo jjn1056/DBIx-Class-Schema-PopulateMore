@@ -1,4 +1,7 @@
-use inc::Module::Install;
+use inc::Module::Install '0.91';
+
+use warnings;
+use strict;
 
 perl_version '5.008008';
 name     'DBIx-Class-Schema-PopulateMore';
