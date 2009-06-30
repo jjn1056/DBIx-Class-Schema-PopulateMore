@@ -24,6 +24,6 @@ build_requires 'YAML::Tiny' => '1.39';
 build_requires 'Path::Class' => '0.17';
 
 auto_install;
-
+tests_recursive;
 WriteAll;
 
