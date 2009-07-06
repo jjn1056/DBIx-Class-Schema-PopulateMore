@@ -11,11 +11,11 @@ DBIx::Class::Schema::PopulateMore - An enhanced populate method
 
 =head1 VERSION
 
-Version 0.12
+Version 0.13
 
 =cut
 
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 =head1 SYNOPSIS
 
@@ -97,7 +97,7 @@ and Label is a key name from from key part of the data hash.
 =item Env
 
 Get's it's value from %ENV.  Typically this will be setup in your shell or at
-application runtime.
+application runtime.  This is a string in the form of "!Env:MY_ENV_VAR"
 
 =item Date
 
@@ -113,7 +113,10 @@ L<DBIx::Class::InflateColumn::DateTime> and mark your column data type as
 Used for when you want the value of something that you expect already exists
 in the database (but for which you didn't just populatemore for, use 'Index'
 for that case.) Use cases for this include lookup style tables, like 'Status'
-or 'Gender', 'State', etc. which you may already have installed.
+or 'Gender', 'State', etc. which you may already have installed. This is a
+string in the form of '!Find:Source.[key1=val1,key2=val2,...'.
+
+If your find doesn't return a single result, expect an error.
 
 It's trivial to write more; please feel free to post me your contributions.
 
@@ -161,6 +164,9 @@ sub populate_more {
 		$command = DBIx::Class::Schema::PopulateMore::Command->new(
 			definitions=>$arg,
 			schema=>$self,
+			exception_cb=>sub {
+				$self->throw_exception(@_);
+			},
 		);
 	}; if ($@) {
 		$self->throw_exception("Can't create Command: $@");

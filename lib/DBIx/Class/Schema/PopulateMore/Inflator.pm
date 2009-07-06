@@ -49,7 +49,7 @@ is a match detected by the visitor.
 
 sub inflate
 { 
-	confess "You forgot to implement ->inflate";
+	die "You forgot to implement ->inflate";
 }
 
 

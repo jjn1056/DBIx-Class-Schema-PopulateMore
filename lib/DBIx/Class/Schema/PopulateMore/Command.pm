@@ -31,9 +31,20 @@ This is the Schema we are populating
 has 'schema' => (
 	is=>'ro',
 	required=>1,
-	isa=>'DBIx::Class::Schema',
+	isa=>'Object',
 );
 
+=head2 exception_cb
+
+contains a callback to the exception method supplied by DBIC
+
+=cut
+
+has 'exception_cb' => (
+	is=>'ro',
+	required=>1,
+	isa=>'CodeRef',
+);
 
 =head2 definitions
 
@@ -255,8 +266,8 @@ Dispatch to the correct inflator
 
 sub dispatch_inflator
 {
-	my $self = shift @_;
-	my ($name, $command) = split(':', shift);
+	my ($self, $arg) = @_;
+	my ($name, $command) =  ($arg =~m/^(\w+):(\w.+)$/); 
 	
 	if( my $inflator = $self->get_inflator($name) )
 	{
@@ -265,7 +276,7 @@ sub dispatch_inflator
 	else
 	{
 		my $available = join(', ', $self->inflator_list);
-		confess "Can't Handle $name, available are: $available";
+		$self->exception_cb->("Can't Handle $name, available are: $available");
 	}
 }
 

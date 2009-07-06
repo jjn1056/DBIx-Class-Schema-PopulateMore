@@ -38,6 +38,10 @@ sub inflate
 	{
 		return $ENV{uc $string};
 	}
+	else
+	{
+		$command->exception_cb->("No match for $string found in %ENV");
+	}
 	
 	return;
 }

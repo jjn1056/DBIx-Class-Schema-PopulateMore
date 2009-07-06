@@ -31,7 +31,7 @@ sub inflate
 	my ($self, $command, $string) = @_;
 
 	return $command->get_rs_index($string)
-	 || confess "Bad Index in Fixture: $string";
+	 || $command->exception_cb->("Bad Index in Fixture: $string");
 }
 
 

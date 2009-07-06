@@ -40,7 +40,7 @@ sub inflate
 	}
 	else
 	{
-		confess "Couldn't deal with $string as a date";
+		$command->exception_cb->("Couldn't deal with $string as a date");
 	}
 
 }

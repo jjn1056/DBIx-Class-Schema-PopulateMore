@@ -1,5 +1,11 @@
 Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
 
+0.13 Monday, July 6, 2009
+    - Fix an error with the way we parse command inflators so that if a source
+      string contains '::' it won't give us the wrong lookup index
+    - Changed from using 'confess' to using the DBIC throw exception method
+    - More minor documentation updates.
+
 0.12 Tuesday, June 30, 2009
     - More tweaks to try and fix my broken local Module::Install
 

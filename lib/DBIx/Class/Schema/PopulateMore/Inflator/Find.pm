@@ -46,10 +46,10 @@ sub inflate
 		if(my $result = $resultset->find($id)) {
 			return $result;
 		} else {
-			confess "Can't find result for '$id' in '$source'";
+			$command->exception_cb->("Can't find result for '$id' in '$source'");
 		}
 	} else {
-		confess "Can't find resultset for $source in $string";
+		$command->exception_cb->("Can't find resultset for $source in $string");
 	}
 	return;
 }

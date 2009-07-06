@@ -1,7 +1,7 @@
 package DBIx::Class::Schema::PopulateMore::Visitor;
 
 use Moose;
-extends 'Data::Visitor', 'Moose::Object';
+extends 'Data::Visitor';
 
 =head1 NAME
 
