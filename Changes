@@ -1,5 +1,9 @@
 Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
 
+0.14 Monday, August 17, 2009
+    - Increased the flexibility of allowed incoming arguments and documented
+      this change.  Added test for this format.
+
 0.13 Monday, July 6, 2009
     - Fix an error with the way we parse command inflators so that if a source
       string contains '::' it won't give us the wrong lookup index

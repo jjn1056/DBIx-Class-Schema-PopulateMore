@@ -11,11 +11,11 @@ DBIx::Class::Schema::PopulateMore - An enhanced populate method
 
 =head1 VERSION
 
-Version 0.13
+Version 0.14
 
 =cut
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 =head1 SYNOPSIS
 
@@ -135,15 +135,60 @@ This module defines the following methods.
 Given an arrayref formatted as in the L</SYNOPSIS> example, populate a rows in
 a database.  Confesses on errors.  
 
+We allow a few different inputs to make it less verbose to use under different
+situations, as well as format nicely using your configuration format of choice.
+
 The $ArrayRef contains one or more elements in the following pattern;
 
-	{Source => {
-		fields => [qw/ column belongs_to has_many/],
-		data => {
-			key_1 => ['value', $row, \@rows ],
-	}}}
+	$schema->populate_more([
+		{Source1 => {
+			fields => [qw/ column belongs_to has_many/],
+			data => {
+				key_1 => ['value', $row, \@rows ],
+		}}},
+		{Source2 => {
+			fields => [qw/ column belongs_to has_many/],
+			data => {
+				key_1 => ['value', $row, \@rows ],
+		}}},
+	]);
 
-'Source' is the name of a DBIC source (as in $schema->resultset($Source)->...)
+The @Array version can be one of the following:
+
+	## Option One
+	$schema->populate_more(
+		{Source1 => {
+			fields => [qw/ column belongs_to has_many/],
+			data => {
+				key_1 => ['value', $row, \@rows ],
+		}}},
+		{Source2 => {
+			fields => [qw/ column belongs_to has_many/],
+			data => {
+				key_1 => ['value', $row, \@rows ],
+		}}},
+	);
+
+	## Option Two
+	$schema->populate_more(
+		Source1 => {
+			fields => [qw/ column belongs_to has_many/],
+			data => {
+				key_1 => ['value', $row, \@rows ],
+			}
+		},
+		Source2 => {
+			fields => [qw/ column belongs_to has_many/],
+			data => {
+				key_1 => ['value', $row, \@rows ],
+			}
+		},
+	);
+
+The last option is probably your choice if you are building a Perl structure
+directly, since it's the least verbose.
+
+'SourceX' is the name of a DBIC source (as in $schema->resultset($Source)->...)
 while fields is an arrayref of either columns or named relationships and data
 is a hashref of rows that you will insert into the Source.
 
@@ -157,12 +202,23 @@ sub populate_more {
     $self->throw_exception("Argument is required.")
 	  unless $arg;
 
-	$arg = ref $arg eq 'ARRAY' ? $arg : [$arg, @rest];
-	
+	my @args = (ref $arg && ref $arg eq 'ARRAY') ? @$arg : ($arg, @rest);
+
+	my @definitions;
+	while(@args) {
+		my $next = shift(@args);
+		if( (ref $next) && (ref $next eq 'HASH') ) {
+			push @definitions, $next;
+		} else {
+			my $value = shift(@args);
+			push @definitions, {$next => $value};
+		}
+	}
+
 	my $command;
 	eval {
 		$command = DBIx::Class::Schema::PopulateMore::Command->new(
-			definitions=>$arg,
+			definitions=>[@definitions],
 			schema=>$self,
 			exception_cb=>sub {
 				$self->throw_exception(@_);

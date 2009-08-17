@@ -1,7 +1,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 35;
+use Test::More tests => 40;
 use DBIx::Class::Schema::PopulateMore::Test::Schema;
 
 ok my $schema = DBIx::Class::Schema::PopulateMore::Test::Schema->connect_and_setup
@@ -184,7 +184,7 @@ FRIENDLIST: {
 	
 }
 
-## Extra tests
+## Extra tests for alternative ->populate_more argument styles
 
 ok my $extra = [
 	{Person	=> {
@@ -202,5 +202,28 @@ ok my $joe = $schema->resultset('Person')->search({name=>'joe'})->first,
 
 is $joe->age, 19, 'Joe is 19';
 
+ok my %index3 = $schema->populate_more(
+		Gender => {
+			fields => 'label',
+			data => {
+				unknown => 'unknown',
+			}
+		},
+			
+		Person => {
+			fields => ['name', 'age', 'gender'],
+			data => {
+				toad => ['toad', 38, '!Index:Gender.unknown'],
+				bill => ['bill', 40, '!Find:Gender.[label=male]'],
+				york => ['york', 45, '!Find:Gender.[label=female]'],
+			}
+		},
+    ) => 'Successful populated.';
 
+ok my ($bill,$toad,$york) = $schema->resultset('Person')->search({name=>[qw/bill toad york/]},{order_by=>\"name asc"})
+  => 'Found bill, toad and york';
+
+is $bill->age, 40, 'Got correct age for bill';
+is $toad->age, 38, 'Got correct age for toad';
+is $york->age, 45, 'Got correct age for york';
 
