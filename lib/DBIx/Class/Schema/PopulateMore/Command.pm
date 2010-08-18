@@ -4,6 +4,7 @@ use Moose;
 use List::MoreUtils qw(pairwise);
 use DBIx::Class::Schema::PopulateMore::Visitor;
 use Module::Pluggable::Object;
+use Moose::Util::TypeConstraints qw(class_type);
 
 
 =head1 NAME
@@ -132,7 +133,7 @@ Loads each of the available inflators, provider access to the objects
 
 has 'inflator_loader' => (
     is=>'ro',
-    isa=>'Module::Pluggable::Object',
+    isa=> class_type('Module::Pluggable::Object'),
     lazy_build=>1,
     handles=>{
         'inflators' => 'plugins',
