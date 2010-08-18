@@ -93,10 +93,10 @@ each instance of a company_person has a related employment history
 =cut
 
 __PACKAGE__
-	->has_one (employment_history => 'DBIx::Class::Schema::PopulateMore::Test::Schema::Result::EmploymentHistory', {
-		'foreign.fk_company_id' => 'self.fk_company_id',
-		'foreign.fk_person_id' => 'self.fk_person_id',
-	});
+    ->has_one (employment_history => 'DBIx::Class::Schema::PopulateMore::Test::Schema::Result::EmploymentHistory', {
+        'foreign.fk_company_id' => 'self.fk_company_id',
+        'foreign.fk_person_id' => 'self.fk_person_id',
+    });
 
 
 =head1 METHODS

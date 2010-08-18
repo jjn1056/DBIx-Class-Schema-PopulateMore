@@ -32,16 +32,16 @@ This is called by Populate's dispatcher, when there is a match.
 
 sub inflate
 { 
-	my ($self, $command, $string) = @_;
-	
-	if(my $dt = DateTimeX::Easy->new($string, default_time_zone=>'UTC'))
-	{
-		return $dt;
-	}
-	else
-	{
-		$command->exception_cb->("Couldn't deal with $string as a date");
-	}
+    my ($self, $command, $string) = @_;
+    
+    if(my $dt = DateTimeX::Easy->new($string, default_time_zone=>'UTC'))
+    {
+        return $dt;
+    }
+    else
+    {
+        $command->exception_cb->("Couldn't deal with $string as a date");
+    }
 
 }
 

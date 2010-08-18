@@ -9,7 +9,7 @@ DBIx::Class::Schema::PopulateMore::Visitor  - Visitor for the Populate Data
 
 =head1 SYNOPSIS
 
-	##Example Usage
+    ##Example Usage
 
 See Tests for more example usage.
 
@@ -35,15 +35,15 @@ The coderef to be execute should the match condition succeed
 =cut
 
 has 'update_callback' => (
-	is=>'rw',
-	required=>1,
-	lazy=>1,
-	isa=>'CodeRef',
-	default=> sub {
-		return sub {
-			return shift;
-		};
-	},
+    is=>'rw',
+    required=>1,
+    lazy=>1,
+    isa=>'CodeRef',
+    default=> sub {
+        return sub {
+            return shift;
+        };
+    },
 );
 
 =head2 match_condition
@@ -57,9 +57,9 @@ inflate to resultset.  This is the most common usecase.
 =cut
 
 has 'match_condition' => (
-	is=>'ro',
-	required=>1,
-	isa=>'RegexpRef'
+    is=>'ro',
+    required=>1,
+    isa=>'RegexpRef'
 );
 
 
@@ -75,9 +75,9 @@ Given a coderef, sets the current callback and returns self so that we can chain
 
 sub callback
 {
-	my $self = shift @_;
-	$self->update_callback(shift @_);
-	return $self;
+    my $self = shift @_;
+    $self->update_callback(shift @_);
+    return $self;
 }
 
 
@@ -90,14 +90,14 @@ as to if this value needs to be inflated via a plugin
 
 sub visit_value
 {
-	my ($self, $data) = @_;
-	
-	if(my $item = $self->match_or_not($data))
-	{	
-		return $self->update_callback->($item);
-	}
+    my ($self, $data) = @_;
+    
+    if(my $item = $self->match_or_not($data))
+    {    
+        return $self->update_callback->($item);
+    }
 
-	return $data;
+    return $data;
 }
 
 
@@ -107,22 +107,22 @@ We break this out to handle the uglyness surrounding dealing with undef values
 and also to make it easier on subclassers.
 
 =cut
-	
+    
 sub match_or_not
 {
-	my ($self, $data) = @_;
-	my $match_condition = $self->match_condition;
-	
-	if( !defined $data )
-	{
-		return;
-	}
-	elsif(my ($item) = ($data=~m/$match_condition/))
-	{	
-		return $item;
-	}
-	
-	return;		
+    my ($self, $data) = @_;
+    my $match_condition = $self->match_condition;
+    
+    if( !defined $data )
+    {
+        return;
+    }
+    elsif(my ($item) = ($data=~m/$match_condition/))
+    {    
+        return $item;
+    }
+    
+    return;        
 }
 
 

@@ -28,22 +28,22 @@ This is called by Populate's dispatcher, when there is a match.
 
 sub inflate
 { 
-	my ($self, $command, $string) = @_;
-	
-	if( defined $ENV{$string} )
-	{
-		return $ENV{$string};
-	}
-	elsif( defined $ENV{uc $string} )
-	{
-		return $ENV{uc $string};
-	}
-	else
-	{
-		$command->exception_cb->("No match for $string found in %ENV");
-	}
-	
-	return;
+    my ($self, $command, $string) = @_;
+    
+    if( defined $ENV{$string} )
+    {
+        return $ENV{$string};
+    }
+    elsif( defined $ENV{uc $string} )
+    {
+        return $ENV{uc $string};
+    }
+    else
+    {
+        $command->exception_cb->("No match for $string found in %ENV");
+    }
+    
+    return;
 }
 
 

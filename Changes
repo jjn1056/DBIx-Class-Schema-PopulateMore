@@ -49,14 +49,14 @@ Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
     - Updated Docs a bit.
 0.04 Friday, June 04, 2008
     - Moved namespace of component from DBIx-Class-PopulateMore
-	- Minor documentation updates
-	
+    - Minor documentation updates
+    
 0.03 Friday, May 29, 2008
     - Fixed missing dependencies from Makefile.PL
-	- Documentation and example improvements
-	
+    - Documentation and example improvements
+    
 0.02 Friday, May 29, 2008
     - Fix for messed up POD and missing Makefile.PL
-	
+    
 0.01 Friday, May 29, 2008
     - Initial release

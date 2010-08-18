@@ -9,8 +9,8 @@ DBIx::Class::Schema::PopulateMore::Inflator::Find - Inflate via ResultSet->find
  
 =head1 SYNOPSIS
 
-	!Find:Rating.10 => $schema->resultset('Rating')->find(10);
-	!Find:Rating.[key=10] => $schema->resultset('Rating')->find(10);
+    !Find:Rating.10 => $schema->resultset('Rating')->find(10);
+    !Find:Rating.[key=10] => $schema->resultset('Rating')->find(10);
 
 =head1 DESCRIPTION
 
@@ -33,25 +33,25 @@ This is called by Populate's dispatcher, when there is a match.
 
 sub inflate
 { 
-	my ($self, $command, $string) = @_;
-	my ($source, $id) = split('\.', $string);
+    my ($self, $command, $string) = @_;
+    my ($source, $id) = split('\.', $string);
 
-	if(my $resultset = $command->schema->resultset($source)) {
-		if($id =~m/^\[.+\]$/) {
-			my ($pairs) = ($id=~m/^\[(.+)\]$/);
-			my @pairs = split(',', $pairs);
-			my %keys = map {split('=', $_) } @pairs;
-			$id = \%keys;
-		}
-		if(my $result = $resultset->find($id)) {
-			return $result;
-		} else {
-			$command->exception_cb->("Can't find result for '$id' in '$source'");
-		}
-	} else {
-		$command->exception_cb->("Can't find resultset for $source in $string");
-	}
-	return;
+    if(my $resultset = $command->schema->resultset($source)) {
+        if($id =~m/^\[.+\]$/) {
+            my ($pairs) = ($id=~m/^\[(.+)\]$/);
+            my @pairs = split(',', $pairs);
+            my %keys = map {split('=', $_) } @pairs;
+            $id = \%keys;
+        }
+        if(my $result = $resultset->find($id)) {
+            return $result;
+        } else {
+            $command->exception_cb->("Can't find result for '$id' in '$source'");
+        }
+    } else {
+        $command->exception_cb->("Can't find resultset for $source in $string");
+    }
+    return;
 }
 
 

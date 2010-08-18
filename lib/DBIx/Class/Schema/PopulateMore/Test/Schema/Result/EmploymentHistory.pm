@@ -45,9 +45,9 @@ The date we started working for the company
 
 __PACKAGE__
     ->add_columns(
-		employment_history_id => {
-			data_type=>'integer',
-		},
+        employment_history_id => {
+            data_type=>'integer',
+        },
         fk_person_id => {
             data_type=>'integer',
         },
@@ -68,7 +68,7 @@ Sets the Primary keys for this table
 
 __PACKAGE__
     ->set_primary_key(qw/employment_history_id/);
-	
+    
 
 =head2 employment_history
 
@@ -77,10 +77,10 @@ each instance of a company_person has a related employment history
 =cut
 
 __PACKAGE__
-	->belongs_to (company_person => 'DBIx::Class::Schema::PopulateMore::Test::Schema::Result::CompanyPerson', {
-		'foreign.fk_company_id' => 'self.fk_company_id',
-		'foreign.fk_person_id' => 'self.fk_person_id',
-	});
+    ->belongs_to (company_person => 'DBIx::Class::Schema::PopulateMore::Test::Schema::Result::CompanyPerson', {
+        'foreign.fk_company_id' => 'self.fk_company_id',
+        'foreign.fk_person_id' => 'self.fk_person_id',
+    });
 
 =head1 METHODS
 

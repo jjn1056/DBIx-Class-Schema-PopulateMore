@@ -28,10 +28,10 @@ This is called by Populate's dispatcher, when there is a match.
 
 sub inflate
 { 
-	my ($self, $command, $string) = @_;
+    my ($self, $command, $string) = @_;
 
-	return $command->get_rs_index($string)
-	 || $command->exception_cb->("Bad Index in Fixture: $string");
+    return $command->get_rs_index($string)
+     || $command->exception_cb->("Bad Index in Fixture: $string");
 }
 
 

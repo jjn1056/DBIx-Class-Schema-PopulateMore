@@ -32,11 +32,11 @@ across all defined inflators.  Defaults to something based on the namespace.
 
 sub name
 {
-	my $class = ref shift @_;
-	my $package = __PACKAGE__;
-	my ($name) = ($class =~m/^$package\:\:(.+)$/);
-	
-	return $name;
+    my $class = ref shift @_;
+    my $package = __PACKAGE__;
+    my ($name) = ($class =~m/^$package\:\:(.+)$/);
+    
+    return $name;
 }
 
 
@@ -49,7 +49,7 @@ is a match detected by the visitor.
 
 sub inflate
 { 
-	die "You forgot to implement ->inflate";
+    die "You forgot to implement ->inflate";
 }
 
 

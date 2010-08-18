@@ -21,9 +21,9 @@ ok my @sources = sort($schema->sources)
 => 'got some sources';
 
 is_deeply \@sources, [qw/
-	Company CompanyPerson
-	EmploymentHistory FriendList 
-	Gender Person/]
+    Company CompanyPerson
+    EmploymentHistory FriendList 
+    Gender Person/]
 => 'Got expected sources';
 
 my $string = join('', <DATA>);
@@ -38,20 +38,20 @@ ok my %index = $schema->populate_more($yaml->[0])
 
 GENDER: {
 
-	ok my $gender_rs = $schema->resultset('Gender')
-	=> 'Got a resultset of genders';
+    ok my $gender_rs = $schema->resultset('Gender')
+    => 'Got a resultset of genders';
 
-	is $gender_rs->count, 2
-	=> 'Got expected number of genders';
+    is $gender_rs->count, 2
+    => 'Got expected number of genders';
 
-	ok $gender_rs->find({label=>'male'})
-	=> 'Found male';
+    ok $gender_rs->find({label=>'male'})
+    => 'Found male';
 
-	ok $gender_rs->find({label=>'female'})
-	=> 'Found female';
+    ok $gender_rs->find({label=>'female'})
+    => 'Found female';
 
-	ok ! $gender_rs->find({label=>'transgender'})
-	=> 'Correctly didn not find transgender';
+    ok ! $gender_rs->find({label=>'transgender'})
+    => 'Correctly didn not find transgender';
 
 }
 
@@ -60,23 +60,23 @@ GENDER: {
 
 PERSON: {
 
-	ok my $person_rs = $schema->resultset('Person')
-	=> 'Got a person resultset';
+    ok my $person_rs = $schema->resultset('Person')
+    => 'Got a person resultset';
 
-	is $person_rs->count, 3
-	=> 'Got expected number of person_rs';
+    is $person_rs->count, 3
+    => 'Got expected number of person_rs';
 
-	ok my $john = $person_rs->search({name=>'john'})->first
-	=> 'Found John';
+    ok my $john = $person_rs->search({name=>'john'})->first
+    => 'Found John';
 
-	is $john->age, 38
-	=> 'Got correct age for john';
+    is $john->age, 38
+    => 'Got correct age for john';
 
-	ok my $jane = $person_rs->search({name=>'jane'})->first
-	=> 'Found John';
+    ok my $jane = $person_rs->search({name=>'jane'})->first
+    => 'Found John';
 
-	is $jane->age, 40
-	=> 'Got correct age for jane';
+    is $jane->age, 40
+    => 'Got correct age for jane';
 
 }
 
@@ -84,54 +84,54 @@ PERSON: {
 
 COMPANY: {
 
-	ok my $company_rs = $schema->resultset('Company')
-	=> 'Got a person resultset';
+    ok my $company_rs = $schema->resultset('Company')
+    => 'Got a person resultset';
 
-	is $company_rs->count, 2
-	=> 'Got expected number of person_rs';
+    is $company_rs->count, 2
+    => 'Got expected number of person_rs';
 
-	ok my $takkle = $company_rs->search({name=>'takkle'})->first
-	=> 'Found takkle';
+    ok my $takkle = $company_rs->search({name=>'takkle'})->first
+    => 'Found takkle';
 
-	ok my $company_persons_rs = $takkle->company_persons
-	=> 'got company_persons';
+    ok my $company_persons_rs = $takkle->company_persons
+    => 'got company_persons';
 
-	is $company_persons_rs->count, 2
-	=> 'got right number of $company_persons_rs';
-	
-	ok my $employees_rs = $takkle->employees
-	=> 'got some employees';
-	
-	ok my $john1 = $employees_rs->search({name=>'john'})->first
-	=> 'found john';
-	
-	is $john1->age, 38
-	=> 'got correct age';
-	
-	ok my $bms = $company_rs->search({name=>'bristol meyers squibb'})->first
-	=> 'Found bristol meyers squibb';
-	
-	is $bms->employees->count, 2
-	=> 'got correct count for bms employees';
-	
+    is $company_persons_rs->count, 2
+    => 'got right number of $company_persons_rs';
+    
+    ok my $employees_rs = $takkle->employees
+    => 'got some employees';
+    
+    ok my $john1 = $employees_rs->search({name=>'john'})->first
+    => 'found john';
+    
+    is $john1->age, 38
+    => 'got correct age';
+    
+    ok my $bms = $company_rs->search({name=>'bristol meyers squibb'})->first
+    => 'Found bristol meyers squibb';
+    
+    is $bms->employees->count, 2
+    => 'got correct count for bms employees';
+    
 }
 
 ## Test Friendlist
 
 FRIENDLIST: {
 
-	ok my $friendlist_rs = $schema->resultset('FriendList')
-	=> 'Got a friendlist resultset';
-	
-	is $friendlist_rs->count, 3
-	=> 'Got expected number of friendlist_rs';
-	
-	ok my $mike = $schema->resultset('Person')->search({name=>'mike'})->first
-	=> 'found mike';
-	
-	is $mike->friends, 2
-	=> 'got correct number of friends for mike';
-	
+    ok my $friendlist_rs = $schema->resultset('FriendList')
+    => 'Got a friendlist resultset';
+    
+    is $friendlist_rs->count, 3
+    => 'Got expected number of friendlist_rs';
+    
+    ok my $mike = $schema->resultset('Person')->search({name=>'mike'})->first
+    => 'found mike';
+    
+    is $mike->friends, 2
+    => 'got correct number of friends for mike';
+    
 }
 __DATA__
 ---

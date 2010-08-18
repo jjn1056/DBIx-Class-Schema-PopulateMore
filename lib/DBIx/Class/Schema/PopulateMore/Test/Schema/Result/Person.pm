@@ -135,8 +135,8 @@ A resultset of people that have me in their friendlist
 
 __PACKAGE__
     ->many_to_many( fans => 'fanlist', 'befriender' );
-	
-	
+    
+    
 =head2 companies_person
 
 Each Person might have a resultset from the company_person table.  This is a
@@ -158,8 +158,8 @@ A resultset of Companies via a resultset of connecting CompanyPersons
 
 __PACKAGE__
     ->many_to_many( companies => 'companies_person', 'company' );
-	
-	
+    
+    
 =head1 METHODS
 
 This module defines the following methods.
