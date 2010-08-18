@@ -1,7 +1,6 @@
 package DBIx::Class::Schema::PopulateMore::Command;
 
 use Moose;
-use MooseX::AttributeHelpers;
 use List::MoreUtils qw(pairwise);
 use DBIx::Class::Schema::PopulateMore::Visitor;
 use Module::Pluggable::Object;
@@ -113,14 +112,14 @@ given an index, returns the related inflated resultset
 =cut
 
 has 'rs_index' => (
-	metaclass=>'Collection::Hash',
+    traits=>['Hash'],
 	is=>'rw',
 	isa=>'HashRef[Object]',
 	lazy=>1,
-	default=>sub {{}},
-	provides=> {
-		set => 'set_rs_index',
-		get => 'get_rs_index',
+	default=>sub { +{} },
+	handles=> {
+        set_rs_index => 'set',
+        get_rs_index => 'get',
 	},
 );
 
@@ -148,13 +147,13 @@ Holds an object that can perform dispatching to the inflators.
 =cut
 
 has 'inflator_dispatcher' => (
-	metaclass=>'Collection::Hash',
+    traits=>['Hash'],
 	is=>'rw',
 	isa=>'HashRef[Object]',
 	lazy_build=>1,
-	provides=>{
-		'keys' => 'inflator_list',
-		'get' => 'get_inflator',
+	handles=>{
+        inflator_list => 'keys',
+        'get_inflator' => 'get',
 	},
 );
 
