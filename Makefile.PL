@@ -10,7 +10,7 @@ author   'John Napiorkowski <jjnapiork6@cpan.org>';
 repository 'git@github.com:jjn1056/DBIx-Class-Schema-PopulateMore.git';
 
 requires 'Moose' => '1.09';
-requires 'DateTimeX::Easy' => '0.088';
+requires 'DateTimeX::Easy' => '0.089';
 requires 'List::MoreUtils' => '0.22';
 requires 'Module::Pluggable' => '3.9';
 requires 'Data::Visitor' => '0.27';

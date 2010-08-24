@@ -32,7 +32,7 @@
 
 # avoid OS X finder files
 \.DS_Store$
-
+\.gitignore
 
 # Don't ship the last dist we built :)
 \.tar\.gz$

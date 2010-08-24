@@ -1,6 +1,6 @@
 Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
 
-0.15 Wednesday, August 18, 2010
+0.15 Tuesday, August 24, 2010
     - Use more modern Moose stuff and updated to modern dependencies.
     - formatting changes (no tabs, etc.)
     - fixed some author only test failures
