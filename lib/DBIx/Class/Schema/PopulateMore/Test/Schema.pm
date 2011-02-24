@@ -69,17 +69,6 @@ sub connect_and_setup {
         ->setup;
 }
 
-=head2 test_dbfile_path
-
-Where the temporary testing database file should go
-
-=cut
-
-sub test_dbfile_path {
-    my $path = Path::Class::File->new(qw/t var dbfile.sqlite/); 
-    return $path->absolute;
-}
-
 =head2 default_dsn
 
 returns a dsn string, suitable for passing to L<DBD::SQLite>, creating the
@@ -89,11 +78,8 @@ database as a temporary file.
 
 sub default_dsn
 {
-    my $class = shift @_;
-    my $filename=$class->test_dbfile_path;
-    return "dbi:SQLite:${filename}";
+    return "dbi:SQLite:dbname=:memory:";
 }
-
 
 =head2 setup
 
@@ -115,7 +101,6 @@ cleanup any temporary files
 
 sub cleanup {
     my $self = shift @_;
-    unlink $self->test_dbfile_path;
 }
 
 sub DESTROY {
