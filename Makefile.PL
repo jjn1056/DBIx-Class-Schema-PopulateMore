@@ -4,6 +4,7 @@ use strict;
 use warnings FATAL => 'all';
 use inc::Module::Install;
 
+requires 'parent' => '0.224';
 requires 'Moose' => '1.24';
 requires 'DateTimeX::Easy' => '0.089';
 requires 'List::MoreUtils' => '0.30';
