@@ -1,7 +1,7 @@
 package # hide from PAUSE
  DBIx::Class::Schema::PopulateMore::Test::Schema::ResultSet;
  
-use base 'DBIx::Class::ResultSet';
+use parent 'DBIx::Class::ResultSet';
 
 =head1 NAME
 

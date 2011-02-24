@@ -2,7 +2,7 @@ package # hide from PAUSE
  DBIx::Class::Schema::PopulateMore::Test::Schema;
 
 use Path::Class;
-use base 'DBIx::Class::Schema';
+use parent 'DBIx::Class::Schema';
 
 
 =head1 NAME

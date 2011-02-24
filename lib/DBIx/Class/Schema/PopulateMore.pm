@@ -3,6 +3,7 @@ package DBIx::Class::Schema::PopulateMore;
 use warnings;
 use strict;
 
+use 5.008005;
 use DBIx::Class::Schema::PopulateMore::Command;
 
 =head1 NAME
@@ -11,11 +12,11 @@ DBIx::Class::Schema::PopulateMore - An enhanced populate method
 
 =head1 VERSION
 
-Version 0.15
+Version 0.16
 
 =cut
 
-our $VERSION = '0.15';
+our $VERSION = '0.16';
 
 =head1 SYNOPSIS
 
@@ -224,7 +225,9 @@ sub populate_more {
 				$self->throw_exception(@_);
 			},
 		);
-	}; if ($@) {
+	};
+
+    if($@) {
 		$self->throw_exception("Can't create Command: $@");
 	} else {
 		$command->execute;
@@ -324,12 +327,12 @@ Thanks to the entire L<DBIx::Class> team for providing such a useful and
 extensible ORM.  Also thanks to the L<Moose> developers for making it fun and
 easy to write beautiful Perl.
 
-=head1 LICENSE & COPYRIGHT
+=head1 COPYRIGHT & LICENSE
 
-Copyright 2008-2010, John Napiorkowski <jjnapiork@cpan.org>
+Copyright 2011, John Napiorkowski
 
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
 
 =cut
 

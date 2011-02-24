@@ -1,7 +1,7 @@
 package #hide from pause
  DBIx::Class::Schema::PopulateMore::Test::Schema::Result::FriendList;
 
-use base 'DBIx::Class::Schema::PopulateMore::Test::Schema::Result';
+use parent 'DBIx::Class::Schema::PopulateMore::Test::Schema::Result';
 
 =head1 NAME
 

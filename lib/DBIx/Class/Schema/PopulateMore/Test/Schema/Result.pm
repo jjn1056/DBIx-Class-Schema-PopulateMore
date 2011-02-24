@@ -1,7 +1,7 @@
 package # hide from PAUSE
  DBIx::Class::Schema::PopulateMore::Test::Schema::Result;
  
-use base 'DBIx::Class';
+use parent 'DBIx::Class::Core';
        
 =head1 NAME
 
@@ -25,7 +25,6 @@ Components to preload.
 __PACKAGE__->load_components(qw/ 
     PK::Auto 
     InflateColumn::DateTime
-    Core 
 /);
 
 

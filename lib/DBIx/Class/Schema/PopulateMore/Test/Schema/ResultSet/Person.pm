@@ -1,7 +1,7 @@
 package #hide from pause
  DBIx::Class::Schema::PopulateMore::Test::Schema::ResultSet::Person;
 
-use base 'DBIx::Class::Schema::PopulateMore::Test::Schema::ResultSet';
+use parent 'DBIx::Class::Schema::PopulateMore::Test::Schema::ResultSet';
 
 
 =head1 NAME
