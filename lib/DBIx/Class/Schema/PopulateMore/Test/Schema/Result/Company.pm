@@ -48,7 +48,8 @@ __PACKAGE__
             data_type=>'integer',
         },
         name => {
-            data_type=>'integer',
+            data_type=>'varchar',
+            size=>64,
         });
 
 

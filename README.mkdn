@@ -4,7 +4,7 @@ DBIx::Class::Schema::PopulateMore - An enhanced populate method
 
 # VERSION
 
-Version 0.16
+Version 0.17
 
 # SYNOPSIS
 
@@ -252,19 +252,19 @@ You can find documentation for this module with the perldoc command.
 
 You can also look for information at:
 
-- * RT: CPAN's request tracker
+- RT: CPAN's request tracker
 
 [http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBIx-Class-Schema-PopulateMore](http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBIx-Class-Schema-PopulateMore)
 
-- * AnnoCPAN: Annotated CPAN documentation
+- AnnoCPAN: Annotated CPAN documentation
 
 [http://annocpan.org/dist/DBIx-Class-Schema-PopulateMore](http://annocpan.org/dist/DBIx-Class-Schema-PopulateMore)
 
-- * CPAN Ratings
+- CPAN Ratings
 
 [http://cpanratings.perl.org/d/DBIx-Class-Schema-PopulateMore](http://cpanratings.perl.org/d/DBIx-Class-Schema-PopulateMore)
 
-- * Search CPAN
+- Search CPAN
 
 [http://search.cpan.org/dist/DBIx-Class-Schema-PopulateMore](http://search.cpan.org/dist/DBIx-Class-Schema-PopulateMore)
 

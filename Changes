@@ -1,5 +1,9 @@
 Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
 
+0.17 Monday, May 9, 2011
+    - Changed column definition from integer to varchar since that column takes
+      characters as well as numbers and the newest DBIC enforces this.
+
 0.16 Thursday, February 24, 2011
     - update copyright info
     - migration to new Module::Install maint tools
@@ -53,7 +57,7 @@ Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
       is what I can test on, plus most of that older stuff has known
       compatibility issues.
     - Requires Perl 5.8.8 since I can't test this on 5.8.6 anywhere (patches
-      or test cases welcomed.) 
+      or test cases welcomed.)
     - changed the way we set default timestamp on sqlite.  this fixes a lot of
       failed test cases.  Now all tests pass for me and I cleared most of the
       types of test failues I see in the backlog.
@@ -61,13 +65,13 @@ Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
 0.04 Friday, June 04, 2008
     - Moved namespace of component from DBIx-Class-PopulateMore
     - Minor documentation updates
-    
+
 0.03 Friday, May 29, 2008
     - Fixed missing dependencies from Makefile.PL
     - Documentation and example improvements
-    
+
 0.02 Friday, May 29, 2008
     - Fix for messed up POD and missing Makefile.PL
-    
+
 0.01 Friday, May 29, 2008
     - Initial release
