@@ -93,7 +93,7 @@ This distribution supplies three expansion commands:
 
 Use for creating relationships.  This is a string in the form of "Source.Label"
 where the Source is the name of the result source that you are creating rows in 
-and Label is a key name from from key part of the data hash.
+and Label is a key name from the key part of the data hash.
 
 =item Env
 
