@@ -103,7 +103,7 @@ sub visit_value
 
 =head2 match_or_not
 
-We break this out to handle the uglyness surrounding dealing with undef values
+We break this out to handle the ugliness surrounding dealing with undef values
 and also to make it easier on subclassers.
 
 =cut

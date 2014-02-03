@@ -66,7 +66,7 @@ __PACKAGE__
 
 =head2 employee
 
-The person that is employeed by a company
+The person that is employed by a company
 
 =cut
 
