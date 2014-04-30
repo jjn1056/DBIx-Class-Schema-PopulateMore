@@ -1,7 +1,7 @@
 use warnings;
 use strict;
 
-use Test::More tests => 40;
+use Test::More tests => 43;
 use DBIx::Class::Schema::PopulateMore::Test::Schema;
 
 ok my $schema = DBIx::Class::Schema::PopulateMore::Test::Schema->connect_and_setup
@@ -201,6 +201,14 @@ ok my $joe = $schema->resultset('Person')->search({name=>'joe'})->first,
   => 'Got a Person';
 
 is $joe->age, 19, 'Joe is 19';
+
+ok $joe->delete, 'Delete Joe';
+
+ok my %index2_again = $schema->populate_more($extra)
+  => 'Successful populated same data again.';
+
+ok my $joe_again = $schema->resultset('Person')->search({name=>'joe'})->first,
+  => 'Got a Person again';
 
 ok my %index3 = $schema->populate_more(
         Gender => {
