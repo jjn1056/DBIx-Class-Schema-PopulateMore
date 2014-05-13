@@ -1,11 +1,13 @@
 package DBIx::Class::Schema::PopulateMore::Command;
 
-use Moose;
+use Moo;
+use MooX::HandlesVia;
 use List::MoreUtils qw(pairwise);
 use DBIx::Class::Schema::PopulateMore::Visitor;
 use Module::Pluggable::Object;
-use Moose::Util::TypeConstraints qw(class_type);
-
+use Type::Library -base;
+use Types::Standard -types;
+use namespace::clean;
 
 =head1 NAME
 
@@ -28,10 +30,10 @@ This is the Schema we are populating
 
 =cut
 
-has 'schema' => (
+has schema => (
     is=>'ro',
     required=>1,
-    isa=>'Object',
+    isa=>Object,
 );
 
 =head2 exception_cb
@@ -40,10 +42,10 @@ contains a callback to the exception method supplied by DBIC
 
 =cut
 
-has 'exception_cb' => (
+has exception_cb => (
     is=>'ro',
     required=>1,
-    isa=>'CodeRef',
+    isa=>CodeRef,
 );
 
 =head2 definitions
@@ -52,11 +54,10 @@ This is an arrayref of information used to populate tables in the database
 
 =cut
 
-has 'definitions' => (
+has definitions => (
     is=>'ro',
     required=>1,
-    isa=>"ArrayRef[HashRef]",
-    auto_deref=>1,
+    isa=>ArrayRef[HashRef],
 );
 
 
@@ -67,10 +68,10 @@ on.  This get's the namespace of the substitution plugin and it's other data.
 
 =cut
 
-has 'match_condition' => (
+has match_condition => (
     is=>'ro',
     required=>1,
-    isa=>'RegexpRef', 
+    isa=>RegexpRef, 
     default=>sub {qr/^!(\w+:.+)$/ },
 );
 
@@ -83,10 +84,9 @@ neater
 
 =cut
 
-has 'visitor' => (
-    is=>'ro',
-    isa=>'DBIx::Class::Schema::PopulateMore::Visitor',
-    lazy_build=>1,
+has visitor => (
+    is=>'lazy',
+    isa=>InstanceOf['DBIx::Class::Schema::PopulateMore::Visitor'],
     handles => [
         'callback',
         'visit', 
@@ -112,11 +112,10 @@ given an index, returns the related inflated resultset
 
 =cut
 
-has 'rs_index' => (
-    traits=>['Hash'],
+has rs_index => (
     is=>'rw',
-    isa=>'HashRef[Object]',
-    lazy=>1,
+    handles_via=>'Hash',
+    isa=>HashRef[Object],
     default=>sub { +{} },
     handles=> {
         set_rs_index => 'set',
@@ -131,10 +130,9 @@ Loads each of the available inflators, provider access to the objects
 
 =cut
 
-has 'inflator_loader' => (
-    is=>'ro',
-    isa=> class_type('Module::Pluggable::Object'),
-    lazy_build=>1,
+has inflator_loader => (
+    is=>'lazy',
+    isa=>InstanceOf['Module::Pluggable::Object'],
     handles=>{
         'inflators' => 'plugins',
     },
@@ -147,14 +145,13 @@ Holds an object that can perform dispatching to the inflators.
 
 =cut
 
-has 'inflator_dispatcher' => (
-    traits=>['Hash'],
-    is=>'rw',
-    isa=>'HashRef[Object]',
-    lazy_build=>1,
+has inflator_dispatcher => (
+    is=>'lazy',
+    handles_via=>'Hash',
+    isa=>HashRef[Object],
     handles=>{
         inflator_list => 'keys',
-        'get_inflator' => 'get',
+        get_inflator  => 'get',
     },
 );
 
@@ -232,7 +229,7 @@ sub execute
 {
     my ($self) = @_;
 
-    foreach my $definition ($self->definitions)
+    foreach my $definition (@{$self->definitions})
     {
         my ($source, $info) = each %$definition;
         my @fields = $self->coerce_to_array($info->{fields});

@@ -1,6 +1,6 @@
 package DBIx::Class::Schema::PopulateMore::Inflator::Find;
 
-use Moose;
+use Moo;
 extends 'DBIx::Class::Schema::PopulateMore::Inflator';
 
 =head1 NAME

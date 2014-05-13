@@ -1,7 +1,10 @@
 package DBIx::Class::Schema::PopulateMore::Visitor;
 
-use Moose;
+use Moo;
 extends 'Data::Visitor';
+use Type::Library -base;
+use Types::Standard -types;
+use namespace::clean;
 
 =head1 NAME
 
@@ -38,7 +41,7 @@ has 'update_callback' => (
     is=>'rw',
     required=>1,
     lazy=>1,
-    isa=>'CodeRef',
+    isa=>CodeRef,
     default=> sub {
         return sub {
             return shift;
@@ -59,7 +62,7 @@ inflate to resultset.  This is the most common usecase.
 has 'match_condition' => (
     is=>'ro',
     required=>1,
-    isa=>'RegexpRef'
+    isa=>RegexpRef,
 );
 
 

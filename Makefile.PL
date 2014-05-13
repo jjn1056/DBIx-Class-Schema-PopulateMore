@@ -5,7 +5,7 @@ use warnings FATAL => 'all';
 use inc::Module::Install;
 
 requires 'parent' => '0.224';
-requires 'Moose' => '1.24';
+requires 'Moo' => '1.004002';
 requires 'DateTimeX::Easy' => '0.089';
 requires 'List::MoreUtils' => '0.30';
 requires 'Module::Pluggable' => '3.9';
