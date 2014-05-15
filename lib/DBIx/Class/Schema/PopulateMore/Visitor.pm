@@ -94,7 +94,7 @@ sub callback
     return $self;
 }
 
-=head visit
+=head2 visit
 
 A simple visitor that only expects to perform replacements on values
 
