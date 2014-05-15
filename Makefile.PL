@@ -9,7 +9,6 @@ requires 'Moo' => '1.004002';
 requires 'DateTimeX::Easy' => '0.089';
 requires 'List::MoreUtils' => '0.30';
 requires 'Module::Pluggable' => '3.9';
-requires 'Data::Visitor' => '0.27';
 
 test_requires 'DBIx::Class' => '0.08127';
 test_requires 'DateTime::Format::SQLite' => '0.11'; ## needed by DBIC for datetime in/deflators

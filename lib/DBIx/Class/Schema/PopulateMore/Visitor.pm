@@ -1,7 +1,7 @@
 package DBIx::Class::Schema::PopulateMore::Visitor;
 
 use Moo;
-extends 'Data::Visitor';
+use Scalar::Util qw/refaddr/;
 use Type::Library -base;
 use Types::Standard -types;
 use namespace::clean;
@@ -65,6 +65,17 @@ has 'match_condition' => (
     isa=>RegexpRef,
 );
 
+=head2 seen
+
+Used to collect up ref addresses of arrays/hashes we have already seen
+
+=cut
+
+has seen => (
+    is  => 'rw',
+    isa => HashRef,
+    default => sub { {} },
+);
 
 =head1 METHODS
 
@@ -83,11 +94,37 @@ sub callback
     return $self;
 }
 
+=head visit
+
+A simple visitor that only expects to perform replacements on values
+
+=cut
+
+sub visit
+{
+    my ( $self, $target ) = @_;
+    if ( ref $target eq 'ARRAY' ) {
+        my $addr = refaddr $target;
+        return $self->seen->{$addr} if defined $self->seen->{$addr};
+        my $new_array = $self->seen->{$addr} = [];
+        @$new_array = map { $self->visit($_) } @$target;
+        return $new_array;
+    }
+    elsif ( ref $target eq 'HASH' ) {
+        my $addr = refaddr $target;
+        return $self->seen->{$addr} if defined $self->seen->{$addr};
+        my $new_hash = $self->seen->{$addr} = {};
+        %$new_hash = map { $_ => $self->visit( $target->{$_} ) } keys %$target;
+        return $new_hash;
+    }
+    else {
+        $self->visit_value($target);
+    }
+}
 
 =head2 visit_value
 
-Overload from the base case L<Data::Visitor>  Here is where we make the choice
-as to if this value needs to be inflated via a plugin
+Here is where we make the choice as to if this value needs to be inflated via a plugin
 
 =cut
 
@@ -132,6 +169,8 @@ sub match_or_not
 =head1 AUTHOR
 
 Please see L<DBIx::Class::Schema::PopulateMore> For authorship information
+
+visit method culled from code in L<Data::Visitor::Lite> which is copyright 2011 Daichi Hiroki <hirokidaichi {at} gmail.com>
 
 =head1 LICENSE
 
