@@ -234,7 +234,7 @@ sub execute
 
     foreach my $definition ($self->definitions)
     {
-        my ($source, $info) = each %$definition;
+        my ($source => $info) = %$definition;
         my @fields = $self->coerce_to_array($info->{fields});
         
         my $data = $self
