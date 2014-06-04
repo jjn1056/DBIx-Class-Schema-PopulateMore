@@ -1,5 +1,10 @@
 Revision history for Perl extension DBIx-Class-Schema-PopulateMore.
 
+0.18 Wednesday, June 4, 2014
+    - Port to Moo
+    - documentation typo fixes
+    - fixed a bug ...::Command where some code was not immutable
+
 0.17 Monday, May 9, 2011
     - Changed column definition from integer to varchar since that column takes
       characters as well as numbers and the newest DBIC enforces this.
