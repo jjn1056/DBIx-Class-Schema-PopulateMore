@@ -1,6 +1,6 @@
 package DBIx::Class::Schema::PopulateMore::Inflator::Date;
 
-use Moose;
+use Moo;
 use DateTimeX::Easy;
 extends 'DBIx::Class::Schema::PopulateMore::Inflator';
 
