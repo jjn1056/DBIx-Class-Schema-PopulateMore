@@ -1,6 +1,7 @@
 package DBIx::Class::Schema::PopulateMore::Inflator;
 
 use Moo;
+use warnings NONFATAL => 'all';
 
 =head1 NAME
 

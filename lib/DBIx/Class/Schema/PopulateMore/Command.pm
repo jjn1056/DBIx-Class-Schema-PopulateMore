@@ -2,6 +2,7 @@ package DBIx::Class::Schema::PopulateMore::Command;
 
 use Moo;
 use MooX::HandlesVia;
+use warnings NONFATAL => 'all';
 use List::MoreUtils qw(pairwise);
 use DBIx::Class::Schema::PopulateMore::Visitor;
 use Module::Pluggable::Object;
