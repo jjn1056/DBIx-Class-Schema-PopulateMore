@@ -4,7 +4,7 @@ DBIx::Class::Schema::PopulateMore - An enhanced populate method
 
 # VERSION
 
-Version 0.17
+Version 0.19
 
 # SYNOPSIS
 
