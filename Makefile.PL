@@ -15,7 +15,7 @@ requires 'Module::Pluggable' => '3.9';
 
 test_requires 'DBIx::Class' => '0.08127';
 test_requires 'DateTime::Format::SQLite' => '0.11'; ## needed by DBIC for datetime in/deflators
-test_requires 'SQL::Translator' => '0.11007';
+test_requires 'SQL::Translator' => '0.11020';
 test_requires 'Test::More' => '0.98';
 test_requires 'File::Find';
 test_requires 'YAML::Tiny' => '1.48';
