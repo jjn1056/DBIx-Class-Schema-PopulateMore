@@ -1,6 +1,7 @@
 package DBIx::Class::Schema::PopulateMore::Visitor;
 
 use Moo;
+use warnings NONFATAL => 'all';
 use Scalar::Util qw/refaddr/;
 use Type::Library -base;
 use Types::Standard -types;

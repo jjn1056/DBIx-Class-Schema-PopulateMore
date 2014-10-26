@@ -1,6 +1,7 @@
 package DBIx::Class::Schema::PopulateMore::Inflator::Find;
 
 use Moo;
+use warnings NONFATAL => 'all';
 extends 'DBIx::Class::Schema::PopulateMore::Inflator';
 
 =head1 NAME

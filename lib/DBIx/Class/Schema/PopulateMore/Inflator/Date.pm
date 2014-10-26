@@ -1,6 +1,7 @@
 package DBIx::Class::Schema::PopulateMore::Inflator::Date;
 
 use Moo;
+use warnings NONFATAL => 'all';
 use DateTimeX::Easy;
 extends 'DBIx::Class::Schema::PopulateMore::Inflator';
 
