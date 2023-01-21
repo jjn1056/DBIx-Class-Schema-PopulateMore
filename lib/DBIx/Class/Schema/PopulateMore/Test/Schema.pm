@@ -7,7 +7,7 @@ use parent 'DBIx::Class::Schema';
 
 =head1 NAME
 
-DBIx::Class::Schema::PopulateMore::Test::Schema; Test Schema
+DBIx::Class::Schema::PopulateMore::Test::Schema - Test Schema
 
 =head1 DESCRIPTION
 
